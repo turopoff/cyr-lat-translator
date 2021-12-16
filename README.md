@@ -1,1 +1,1 @@
-# cyr-lat-translator
+# Cyril-latin-translator
