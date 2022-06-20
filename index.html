@@ -2,30 +2,61 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta
+        http-equiv="Content-Type"
+        content="text/html; charset=UTF-8"
+    >
     <title>Lotin &lt;-&gt; Кирил</title>
 </head>
 
 <body>
-    <div align="center">
-        <form name="transcription">
-            <table width="100%">
-                <tbody>
-                    <tr align="center">
-                        <td class="position_relative" width="50%">
-                            <div class="title"> Lotin alifbosi: </div> <textarea autofocus id="latId" name="textLat"
-                                rows="12" onkeyup="latcyr()" class="textarea"></textarea>
-                            <div onclick="onCopy('lat')" class="copyBtn">Nusxa olish</div>
-                        </td>
-                        <td class="position_relative" width="50%">
-                            <div class="title"> Кирил алифбоси: </div> <textarea id="cyrId" name="textCyr" rows="12"
-                                onkeyup="cyrlat()" class="textarea"></textarea>
-                            <div onclick="onCopy('cyr')" class="copyBtn">Нусха олиш</div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
+    <div>
+        <div align="center">
+            <form name="transcription">
+                <table width="100%">
+                    <tbody>
+                        <tr align="center">
+                            <td
+                                class="position_relative"
+                                width="50%"
+                            >
+                                <div class="title"> Lotin alifbosi: </div> <textarea
+                                    autofocus
+                                    id="latId"
+                                    name="textLat"
+                                    rows="12"
+                                    onkeyup="latcyr()"
+                                    class="textarea"
+                                ></textarea>
+                                <div
+                                    onclick="onCopy('lat')"
+                                    class="copyBtn"
+                                >Nusxa olish</div>
+                            </td>
+                            <td
+                                class="position_relative"
+                                width="50%"
+                            >
+                                <div class="title"> Кирил алифбоси: </div> <textarea
+                                    id="cyrId"
+                                    name="textCyr"
+                                    rows="12"
+                                    onkeyup="cyrlat()"
+                                    class="textarea"
+                                ></textarea>
+                                <div
+                                    onclick="onCopy('cyr')"
+                                    class="copyBtn"
+                                >Нусха олиш</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div style="text-align: right;font-size:10px">
+            v-1.0.0
+        </div>
     </div>
 
     <script>
@@ -159,6 +190,7 @@
             car = car.replace(/р/g, "r");
             car = car.replace(/с/g, "s");
             car = car.replace(/ш/g, "sh");
+            car = car.replace(/щ/g, "sh");
             car = car.replace(/т/g, "t");
             car = car.replace(/у/g, "u");
             car = car.replace(/в/g, "v");
@@ -166,7 +198,8 @@
             car = car.replace(/й/g, "y");
             car = car.replace(/з/g, "z");
             car = car.replace(/ъ/g, "’");
-            car = car.replace(/ь/g, "’");
+            car = car.replace(/ь/g, "");
+            car = car.replace(/ы/g, "i");
             car = car.replace(/А/g, "A");
             car = car.replace(/Б/g, "B");
             car = car.replace(/Ч/g, "Ch");
@@ -188,7 +221,7 @@
             car = car.replace(/П/g, "P");
             car = car.replace(/Р/g, "R");
             car = car.replace(/С/g, "S");
-            car = car.replace(/Ш/g, "Sh");
+            car = car.replace(/Ш/g, "SH");
             car = car.replace(/Т/g, "T");
             car = car.replace(/У/g, "U");
             car = car.replace(/В/g, "V");
@@ -204,6 +237,9 @@
             car = car.replace(/Ё/g, "Yo");
             car = car.replace(/Ю/g, "Yu");
             car = car.replace(/Ц/g, "Ts");
+            car = car.replace(/Ы/g, "I");
+            car = car.replace(/Щ/g, "SH");
+            car = car.replace(/Ь/g, "");
             document.transcription.textLat.value = car;
         }
         function copy1() {
