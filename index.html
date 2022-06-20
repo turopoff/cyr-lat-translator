@@ -20,7 +20,9 @@
                                 class="position_relative"
                                 width="50%"
                             >
-                                <div class="title"> Lotin alifbosi: </div> <textarea
+
+                                <div class="title"> Lotin alifbosi: </div>
+                                <textarea
                                     autofocus
                                     id="latId"
                                     name="textLat"
@@ -37,7 +39,8 @@
                                 class="position_relative"
                                 width="50%"
                             >
-                                <div class="title"> Кирил алифбоси: </div> <textarea
+                                <div class="title"> Кирил алифбоси: </div>
+                                <textarea
                                     id="cyrId"
                                     name="textCyr"
                                     rows="12"
@@ -50,6 +53,19 @@
                                 >Нусха олиш</div>
                             </td>
                         </tr>
+                        <tr align="right">
+                            <td colspan="2">
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        id="upper-checkbox"
+                                    >
+                                    <label for="upper-checkbox">
+                                        Бош ҳарфлар
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </form>
@@ -60,6 +76,16 @@
     </div>
 
     <script>
+        let isUpper = false;
+
+        document.getElementById('upper-checkbox').addEventListener('change', (e) => {
+            e.target.value = e.target.value == 'on' ? 'off' : 'on'
+            isUpper = e.target.value != 'on'
+
+            latcyr()
+            cyrlat()
+        })
+
         function onCopy(status) {
             let text = "";
             if (status == "cyr") {
@@ -163,6 +189,9 @@
             car = car.replace(/Йу/g, "Ю");
             car = car.replace(/Тс/g, "Ц");
             car = car.replace(/\n /g, "\n");
+
+            if (isUpper) car = car.toUpperCase()
+
             document.transcription.textCyr.value = car;
         }
 
@@ -240,17 +269,10 @@
             car = car.replace(/Ы/g, "I");
             car = car.replace(/Щ/g, "SH");
             car = car.replace(/Ь/g, "");
+
+            if (isUpper) car = car.toUpperCase()
+
             document.transcription.textLat.value = car;
-        }
-        function copy1() {
-            textRange = document.transcription.textCyr.createTextRange();
-            textRange.execCommand("Copy");
-            textRange = "";
-        }
-        function copy2() {
-            textRange = document.transcription.textLat.createTextRange();
-            textRange.execCommand("Copy");
-            textRange = "";
         }
 
     </script>
@@ -258,6 +280,11 @@
     <style type="text/css">
         body {
             background-color: hsl(0, 0%, 25%);
+
+        }
+
+        label {
+            color: #ececec;
         }
 
         body,
