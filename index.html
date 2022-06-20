@@ -64,6 +64,15 @@
                                         Бош ҳарфлар
                                     </label>
                                 </div>
+                                <div>
+                                    <label for="remove-symbols">
+                                        <small>
+                                            Белгиларни олиб ташлаш (Пробел билан ажратинг)
+                                        </small>
+                                    </label>
+                                    <br>
+                                    <input id="remove-symbols">
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -77,10 +86,19 @@
 
     <script>
         let isUpper = false;
+        let removeValue = [];
 
         document.getElementById('upper-checkbox').addEventListener('change', (e) => {
             e.target.value = e.target.value == 'on' ? 'off' : 'on'
             isUpper = e.target.value != 'on'
+
+            latcyr()
+            cyrlat()
+        })
+
+        document.getElementById('remove-symbols').addEventListener('blur', (e) => {
+            const value = `${e.target.value || ''}`;
+            removeValue = value.split(' ').filter(x => x.trim())
 
             latcyr()
             cyrlat()
@@ -192,6 +210,10 @@
 
             if (isUpper) car = car.toUpperCase()
 
+            if (removeValue?.length) {
+                removeValue.forEach(x => car = car.replace(x, ""))
+            }
+
             document.transcription.textCyr.value = car;
         }
 
@@ -272,6 +294,10 @@
 
             if (isUpper) car = car.toUpperCase()
 
+            if (removeValue?.length) {
+                removeValue.forEach(x => car = car.replace(x, ""))
+            }
+
             document.transcription.textLat.value = car;
         }
 
@@ -279,41 +305,44 @@
 
     <style type="text/css">
         body {
-            background-color: hsl(0, 0%, 25%);
+            /* background-color: hsl(0, 0%, 25%); */
 
         }
 
         label {
-            color: #ececec;
+            /* color: #ececec; */
         }
 
         body,
-        textarea {
+        textarea,
+        input {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
         .title {
             font-weight: 600;
             font-size: 20px;
-            color: #ececec;
+            /* color: #ececec; */
             padding-bottom: 5px;
         }
 
         .textarea {
             width: 98%;
-            color: #c1c1c1;
-            background-color: #4e4e4e;
+            /* color: #c1c1c1;
+            background-color: #4e4e4e; */
             font-size: 18pt;
             padding: 5px;
         }
 
-        .textarea:focus {
+        .textarea:focus,
+        input:focus {
             background-color: #00000024;
-            border-color: #7d1212;
+            outline: none;
         }
 
+
         .textarea::selection {
-            background-color: #4e4e4e;
+            /* background-color: #4e4e4e; */
         }
 
         .position_relative {
@@ -327,16 +356,24 @@
             cursor: pointer;
             color: #ffffff;
             padding: 5px 10px;
-            background-color: #19672a;
+            background-color: #279745;
             user-select: none;
         }
 
         .copyBtn:hover {
-            background-color: #279745;
+            background-color: #24a045;
         }
 
         .copyBtn:active {
             box-shadow: 1px 1px 2px #615f5f94;
+        }
+
+        #remove-symbols {
+            max-width: 310px;
+            width: 100%;
+            /* color: #c1c1c1;
+            background-color: #4e4e4e; */
+            margin-bottom: 10px;
         }
     </style>
 </body>
